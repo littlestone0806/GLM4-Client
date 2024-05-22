@@ -1,4 +1,4 @@
-基于winform编写了一个美观的GLM4客户端，支持流式输出，兼容官方api
+基于winform编写了一个美观的GLM4客户端，调用官方api，支持对话、图片生成、角色扮演、角色编辑等功能
 
 官方模型调用接口文档：https://open.bigmodel.cn/dev/api#glm-4
 
