@@ -1,6 +1,6 @@
 基于winform编写了一个美观的GLM4客户端，支持流式输出，兼容官方api
 
-官方模型调用接口文档：[https://github.com/THUDM/ChatGLM-6B](https://open.bigmodel.cn/dev/api#glm-4)
+官方模型调用接口文档：https://open.bigmodel.cn/dev/api#glm-4
 
 winform控件仓库：https://github.com/kwwwvagaa/NetWinformControl
 
@@ -9,7 +9,8 @@ winform控件仓库：https://github.com/kwwwvagaa/NetWinformControl
 
 如果想拷贝到其他电脑，只需要拷贝Debug目录到指定电脑即可
 
-# 运行效果
+# GLM4运行效果
+![录制_2024_05_22_17_01_26_483](https://github.com/littlestone0806/GLM4-Client/assets/42195561/0b000041-ab21-44cc-916b-21add17874c3)
 
-![录制_2023_04_18_16_24_50_283](https://user-images.githubusercontent.com/42195561/232732815-1a33fb48-aa08-4e88-9278-d72439a3f035.gif)
-
+# CharacterGLM运行效果
+![录制_2024_05_22_17_02_35_475](https://github.com/littlestone0806/GLM4-Client/assets/42195561/aa34f8a5-244f-4129-9054-6da62a539a42)
