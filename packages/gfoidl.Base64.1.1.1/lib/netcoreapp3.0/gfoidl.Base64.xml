@@ -1,0 +1,379 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>gfoidl.Base64</name>
+    </assembly>
+    <members>
+        <member name="T:gfoidl.Base64.Base64">
+            <summary>
+            Base64 encoding / decoding.
+            </summary>
+        </member>
+        <member name="F:gfoidl.Base64.Base64.MaximumEncodeLength">
+            <summary>
+            The maximum length that can be encoded.
+            </summary>
+            <remarks>
+            If you need to encode data that is larger than <see cref="F:gfoidl.Base64.Base64.MaximumEncodeLength" />,
+            you can <see cref="M:System.Span`1.Slice(System.Int32,System.Int32)" /> the data and encode with
+            buffer chains.
+            </remarks>
+        </member>
+        <member name="P:gfoidl.Base64.Base64.Default">
+            <summary>
+            The base64 encoder / decoder.
+            </summary>
+        </member>
+        <member name="P:gfoidl.Base64.Base64.Url">
+            <summary>
+            The base64Url encoder / decoder.
+            </summary>
+        </member>
+        <member name="M:gfoidl.Base64.Base64.GetEncodedLength(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.GetMaxDecodedLength(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.GetDecodedLength(System.ReadOnlySpan{System.Byte})">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.GetDecodedLength(System.ReadOnlySpan{System.Char})">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Encode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Encode(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@,System.Int32@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Decode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Decode(System.ReadOnlySpan{System.Char},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Encode(System.ReadOnlySpan{System.Byte})">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.Decode(System.ReadOnlySpan{System.Char})">
+            <inheritdoc />
+        </member>
+        <member name="M:gfoidl.Base64.Base64.DetectEncoding(System.ReadOnlySpan{System.Byte},System.Boolean)">
+            <summary>
+            Detects whether <paramref name="encoded" /> is base64 or base64Url.
+            </summary>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="fast">
+            When <c>false</c> (default) <paramref name="encoded" /> is scanned
+            one time for base64 chars and a second time for base64Url chars.
+            So if there is a mix of them, <see cref="F:gfoidl.Base64.EncodingType.Unknown" />
+            will be returned.
+            <para>
+            When <c>true</c> <paramref name="encoded" /> is scanned only once
+            and for base64Url chars. So if there is a mix of base64 and base64Url,
+            the result will be <see cref="F:gfoidl.Base64.EncodingType.Base64Url" />, and may
+            throw a <see cref="T:System.FormatException" /> on decoding.
+            </para>
+            </param>
+            <returns>base64 or base64Url</returns>
+            <remarks>
+            It is an O(n) scan / detection of the encoding type, and input is
+            not validated for conforming the base64 standard. Thus there is no
+            'Invalid' encoding type.
+            </remarks>
+        </member>
+        <member name="M:gfoidl.Base64.Base64.DetectEncoding(System.ReadOnlySpan{System.Char},System.Boolean)">
+            <summary>
+            Detects whether <paramref name="encoded" /> is base64 or base64Url.
+            </summary>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="fast">
+            When <c>false</c> (default) <paramref name="encoded" /> is scanned
+            one time for base64 chars and a second time for base64Url chars.
+            So if there is a mix of them, <see cref="F:gfoidl.Base64.EncodingType.Unknown" />
+            will be returned.
+            <para>
+            When <c>true</c> <paramref name="encoded" /> is scanned only once
+            and for base64Url chars. So if there is a mix of base64 and base64Url,
+            the result will be <see cref="F:gfoidl.Base64.EncodingType.Base64Url" />, and may
+            throw a <see cref="T:System.FormatException" /> on decoding.
+            </para>
+            </param>
+            <returns>base64 or base64Url</returns>
+            <remarks>
+            It is an O(n) fast scan / detection of the encoding type, and input is
+            not validated for conforming the base64 standard. Thus there is no
+            'Invalid' encoding type.
+            </remarks>
+        </member>
+        <member name="T:gfoidl.Base64.IBase64">
+            <summary>
+            Base64 encoding / decoding.
+            </summary>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.GetEncodedLength(System.Int32)">
+            <summary>
+            Gets the length of the encoded data.
+            </summary>
+            <param name="sourceLength">The length of the data.</param>
+            <returns>The base64 encoded length of <paramref name="sourceLength" />.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when <paramref name="sourceLength" /> is greater than <see cref="F:gfoidl.Base64.Base64.MaximumEncodeLength" />.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.GetMaxDecodedLength(System.Int32)">
+            <summary>
+            Gets the maximum length of the decoded data.
+            The result may not be the exact length due to padding.
+            Use <see cref="M:gfoidl.Base64.IBase64.GetDecodedLength(System.ReadOnlySpan{System.Byte})" /> or <see cref="M:gfoidl.Base64.IBase64.GetDecodedLength(System.ReadOnlySpan{System.Char})" />
+            for an accurate length.
+            </summary>
+            <param name="encodedLength">The length of the encoded data.</param>
+            <returns>The maximum base64 decoded length of <paramref name="encodedLength" />.</returns>
+            <remarks>
+            This method can be used for buffer-chains, to get the size which is at least
+            required for decoding.
+            </remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when <paramref name="encodedLength" /> is negative.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.GetDecodedLength(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Gets the length of the decoded data.
+            </summary>
+            <param name="encoded">The encoded data.</param>
+            <returns>The base64 decoded length of <paramref name="encoded" />. Any padding is handled.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            For <see cref="P:gfoidl.Base64.Base64.Default" /> thrown when the length of <paramref name="encoded" /> is
+            less than 4, as it is not a valid length according the base64 standard.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.GetDecodedLength(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Gets the length of the decoded data.
+            </summary>
+            <param name="encoded">The encoded data.</param>
+            <returns>The base64 decoded length of <paramref name="encoded" />. Any padding is handled.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            For <see cref="P:gfoidl.Base64.Base64.Default" /> thrown when the length of <paramref name="encoded" /> is
+            less than 4, as it is not a valid length according the base64 standard.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Encode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <summary>
+            Base64 encodes <paramref name="data" />.
+            </summary>
+            <param name="data">The data to be base64 encoded.</param>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="consumed">
+            The number of input bytes consumed during the operation. This can be used to slice the input for
+            subsequent calls, if necessary.
+            </param>
+            <param name="written">
+            The number of bytes written into the output span. This can be used to slice the output for
+            subsequent calls, if necessary.
+            </param>
+            <param name="isFinalBlock">
+            <c>true</c> (default) when the input span contains the entire data to decode.
+            Set to <c>false</c> only if it is known that the input span contains partial data with more data to follow.
+            </param>
+            <returns>
+            It returns the OperationStatus enum values:
+            <list type="bullet">
+            <item><description>Done - on successful processing of the entire input span</description></item>
+            <item><description>DestinationTooSmall - if there is not enough space in the output span to fit the decoded input</description></item>
+            <item><description>
+            NeedMoreData - only if isFinalBlock is false and the input is not a multiple of 4, otherwise the partial input
+            would be considered as InvalidData
+            </description></item>
+            <item><description>
+            InvalidData - if the input contains bytes outside of the expected base64 range, or if it contains invalid/more
+            than two padding characters, or if the input is incomplete (i.e. not a multiple of 4) and isFinalBlock is true.
+            </description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Encode(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@,System.Int32@,System.Boolean)">
+            <summary>
+            Base64 encodes <paramref name="data" />.
+            </summary>
+            <param name="data">The data to be base64 encoded.</param>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="consumed">
+            The number of input bytes consumed during the operation. This can be used to slice the input for
+            subsequent calls, if necessary.
+            </param>
+            <param name="written">
+            The number of chars written into the output span. This can be used to slice the output for
+            subsequent calls, if necessary.
+            </param>
+            <param name="isFinalBlock">
+            <c>true</c> (default) when the input span contains the entire data to decode.
+            Set to <c>false</c> only if it is known that the input span contains partial data with more data to follow.
+            </param>
+            <returns>
+            It returns the OperationStatus enum values:
+            <list type="bullet">
+            <item><description>Done - on successful processing of the entire input span</description></item>
+            <item><description>DestinationTooSmall - if there is not enough space in the output span to fit the decoded input</description></item>
+            <item><description>
+            NeedMoreData - only if isFinalBlock is false and the input is not a multiple of 4, otherwise the partial input
+            would be considered as InvalidData
+            </description></item>
+            <item><description>
+            InvalidData - if the input contains bytes outside of the expected base64 range, or if it contains invalid/more
+            than two padding characters, or if the input is incomplete (i.e. not a multiple of 4) and isFinalBlock is true.
+            </description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Decode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <summary>
+            Base64 decodes <paramref name="encoded" />.
+            </summary>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="data">The base64 encoded data to decode.</param>
+            <param name="consumed">
+            The number of input bytes consumed during the operation. This can be used to slice the input for
+            subsequent calls, if necessary.
+            </param>
+            <param name="written">
+            The number of bytes written into the output span. This can be used to slice the output for
+            subsequent calls, if necessary.
+            </param>
+            <param name="isFinalBlock">
+            <c>true</c> (default) when the input span contains the entire data to decode.
+            Set to <c>false</c> only if it is known that the input span contains partial data with more data to follow.
+            </param>
+            <returns>
+            It returns the OperationStatus enum values:
+            <list type="bullet">
+            <item><description>Done - on successful processing of the entire input span</description></item>
+            <item><description>DestinationTooSmall - if there is not enough space in the output span to fit the decoded input</description></item>
+            <item><description>
+            NeedMoreData - only if isFinalBlock is false and the input is not a multiple of 4, otherwise the partial input
+            would be considered as InvalidData
+            </description></item>
+            <item><description>
+            InvalidData - if the input contains bytes outside of the expected base64 range, or if it contains invalid/more
+            than two padding characters, or if the input is incomplete (i.e. not a multiple of 4) and isFinalBlock is true.
+            </description></item>
+            </list>
+            </returns>
+            <exception cref="T:System.FormatException">
+            Thrown for <see cref="P:gfoidl.Base64.Base64.Url" /> when the length is not conforming the base64Url standard.
+            <paramref name="isFinalBlock" /> set to <c>false</c> won't throw this exception.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Decode(System.ReadOnlySpan{System.Char},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)">
+            <summary>
+            Base64 decodes <paramref name="encoded" />.
+            </summary>
+            <param name="encoded">The base64 encoded data.</param>
+            <param name="data">The base64 decoded data.</param>
+            <param name="consumed">
+            The number of input chars consumed during the operation. This can be used to slice the input for
+            subsequent calls, if necessary.
+            </param>
+            <param name="written">
+            The number of bytes written into the output span. This can be used to slice the output for
+            subsequent calls, if necessary.
+            </param>
+            <param name="isFinalBlock">
+            <c>true</c> (default) when the input span contains the entire data to decode.
+            Set to <c>false</c> only if it is known that the input span contains partial data with more data to follow.
+            </param>
+            <returns>
+            It returns the OperationStatus enum values:
+            <list type="bullet">
+            <item><description>Done - on successful processing of the entire input span</description></item>
+            <item><description>DestinationTooSmall - if there is not enough space in the output span to fit the decoded input</description></item>
+            <item><description>
+            NeedMoreData - only if isFinalBlock is false and the input is not a multiple of 4, otherwise the partial input
+            would be considered as InvalidData
+            </description></item>
+            <item><description>
+            InvalidData - if the input contains chars outside of the expected base64 range, or if it contains invalid/more
+            than two padding characters, or if the input is incomplete (i.e. not a multiple of 4) and isFinalBlock is true.
+            </description></item>
+            </list>
+            </returns>
+            <exception cref="T:System.FormatException">
+            Thrown for <see cref="P:gfoidl.Base64.Base64.Url" /> when the length is not conforming the base64Url standard.
+            <paramref name="isFinalBlock" /> set to <c>false</c> won't throw this exception.
+            </exception>
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Encode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Base64 encoded <paramref name="data" /> to a <see cref="T:System.String" />.
+            </summary>
+            <param name="data">The data to be base64 encoded.</param>
+            <returns>The base64 encoded <see cref="T:System.String" />.</returns>
+            <remarks>
+            For base64 encoding on .NET Full or .NET Standard perf-wise it may be
+            better to use <see cref="M:System.Convert.ToBase64String(System.Byte[])" /> if possible.<br />
+            Please benchmark yourself.
+            <para>
+            base64Url or .NET Core is not affected by this.
+            </para>
+            </remarks>
+            <seealso href="https://github.com/gfoidl/Base64/issues/137" />
+        </member>
+        <member name="M:gfoidl.Base64.IBase64.Decode(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Base64 decodes <paramref name="encoded" /> into a <see cref="T:System.Byte" /> array.
+            </summary>
+            <param name="encoded">The base64 encoded data in string-form.</param>
+            <returns>The base64 decoded data.</returns>
+            <exception cref="T:System.FormatException">
+            The input is not a valid Base64 string as it contains a non-base 64 character,
+            more than two padding characters, or an illegal character among the padding characters.
+            </exception>
+            <remarks>
+            For base64 decoding on .NET Full or .NET Standard perf-wise it may be
+            better to use <see cref="M:System.Convert.FromBase64String(System.String)" /> or
+            <see cref="M:System.Convert.FromBase64CharArray(System.Char[],System.Int32,System.Int32)" /> if possible.<br />
+            Please benchmark yourself.
+            <para>
+            base64Url or .NET Core is not affected by this.
+            </para>
+            </remarks>
+            <seealso href="https://github.com/gfoidl/Base64/issues/137" />
+        </member>
+        <member name="T:gfoidl.Base64.ReadOnlySequenceExtensions">
+            <summary>
+            Provides methods for encoding / decoding to <see cref="T:System.Buffers.ReadOnlySequence`1" />
+            and <see cref="T:System.Buffers.IBufferWriter`1" />.
+            </summary>
+        </member>
+        <member name="M:gfoidl.Base64.ReadOnlySequenceExtensions.TryDecode(gfoidl.Base64.Base64,System.Buffers.ReadOnlySequence{System.Byte}@,System.Buffers.IBufferWriter{System.Byte},System.Int64@,System.Int64@)">
+            <summary>
+            Base64 decodes <paramref name="base64" /> into <paramref name="writer" />.
+            </summary>
+            <param name="encoder">Either <see cref="P:gfoidl.Base64.Base64.Default" /> or <see cref="P:gfoidl.Base64.Base64.Url" /></param>
+            <param name="base64">The base64 encoded data to decode.</param>
+            <param name="writer">The buffer-writer, where the decoded data is written to.</param>
+            <param name="consumed">The total number of bytes consumed during the operation.</param>
+            <param name="written">The total number of bytes written to <paramref name="writer" />.</param>
+            <returns>
+            <c>true</c> if the operation is successfull. <c>false</c> if there is any invalid. In that
+            case as much as possible -- i.e. up to the point of invalid data -- of <paramref name="base64" />
+            is consumed.
+            </returns>
+            <seealso cref="M:gfoidl.Base64.IBase64.Decode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)" />.
+        </member>
+        <member name="M:gfoidl.Base64.ReadOnlySequenceExtensions.Encode(gfoidl.Base64.Base64,System.Buffers.ReadOnlySequence{System.Byte}@,System.Buffers.IBufferWriter{System.Byte},System.Int64@,System.Int64@)">
+            <summary>
+            Base64 encoded <paramref name="data" /> into <paramref name="writer" />.
+            </summary>
+            <param name="encoder">Either <see cref="P:gfoidl.Base64.Base64.Default" /> or <see cref="P:gfoidl.Base64.Base64.Url" /></param>
+            <param name="data">The data to be base64 encoded.</param>
+            <param name="writer">The buffer-writer, where the encoded data is written to.</param>
+            <param name="consumed">The total number of bytes consumed during the operation.</param>
+            <param name="written">The total number of bytes written to <paramref name="writer" />.</param>
+            <seealso cref="M:gfoidl.Base64.IBase64.Encode(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Int32@,System.Boolean)" />.
+        </member>
+    </members>
+</doc>
